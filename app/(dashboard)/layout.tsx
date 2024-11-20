@@ -1,4 +1,7 @@
+// app/(dashboard)/layout.tsx
+import BreadcrumbHeader from "@/components/bread-crumb-header";
 import DesktopSidebar from "@/components/sidebar";
+import { ModeToggle } from "@/components/theme-toggle";
 import { Separator } from "@/components/ui/separator";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -7,7 +10,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <DesktopSidebar />
       <div className="flex flex-col flex-1 min-h-screen">
         <header className="flex items-center justify-between px-6 py-4 h-[50px] container">
-          DataFlow
+          <BreadcrumbHeader />
+          <div className="gap-1 flex items-center ">
+            <ModeToggle />
+          </div>
         </header>
         <Separator />
         <div className="overflow-auto">
