@@ -4,9 +4,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Logo from "./logo";
 import { routes } from "./sidebar-route";
-import { buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
+import { Sheet, SheetContent, SheetTrigger} from "./ui/sheet";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { MenuIcon } from "lucide-react";
+import { useState } from "react";
+
 
 const DesktopSidebar = () => {
   const pathname = usePathname();

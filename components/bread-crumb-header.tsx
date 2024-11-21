@@ -9,16 +9,17 @@ import {
 
 import { usePathname } from "next/navigation";
 import React from "react";
+import MobileSidebar from "./mobile-sidebar";
+
 
 const BreadcrumbHeader = () => {
   const pathName = usePathname();
-  const paths = React.useMemo(
-    () => (pathName === "/" ? [""] : pathName.split("/")),
-    [pathName]
-  );
+  const paths = pathName === "/" ? [""] : pathName?.split("/");
 
   return (
-    <Breadcrumb>
+    <div className="flex items-center flex-start">
+      <MobileSidebar />
+      <Breadcrumb>
       <BreadcrumbList>
         {paths.map((path, index) => (
           <BreadcrumbItem key={index}>
@@ -29,6 +30,7 @@ const BreadcrumbHeader = () => {
         ))}
       </BreadcrumbList>
     </Breadcrumb>
+    </div>
   );
 };
 

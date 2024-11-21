@@ -30,7 +30,7 @@ const Logo = ({
         <span className="bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">
           Data
         </span>
-        <span className="text-stone-700 dark:text-stone-300">Scrape</span>
+        <span className="text-stone-700 dark:text-stone-500">Scrape</span>
       </div>
     </Link>
   );
