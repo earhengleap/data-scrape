@@ -28,23 +28,31 @@ const CreateWorkflowDialog = ({ triggerText }: { triggerText?: string }) => {
     const { mutate, isPending } = useMutation({
         mutationFn: CreateWorkflow,
         onSuccess: () => {
-            toast.success("Workflow created successfully;");
+            toast.success("Workflow created successfully");
+            setIsOpen(false);
         },
-        onError: () => {
+        onError: (error) => {
             toast.error("Failed to create workflow");
+            console.error("Create workflow error:", error);
         },
     }) 
 
     const onSubmit = useCallback(
         (values: CreateWorkflowSchemaType) => {
-            toast.loading("Creating workflow...", {id: "create-workflow"});
-            mutate(values);
+            const toastId = toast.loading("Creating workflow...");
+            mutate(values, {
+                onSuccess: () => toast.dismiss(toastId),
+                onError: () => toast.dismiss(toastId)
+            });
         },
         [mutate]
     )
 
     return (
-        <Dialog open={IsOpen} onOpenChange={setIsOpen}>
+        <Dialog open={IsOpen} onOpenChange={(IsOpen) => {
+            form.reset();
+            setIsOpen(IsOpen);
+        }}>
             <DialogTrigger asChild>
                 <Button>{triggerText ?? "Create workflow"}</Button>
             </DialogTrigger>
