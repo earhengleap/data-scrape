@@ -11,6 +11,7 @@ export const CreateFlowNode = (
     return {
         id: crypto.randomUUID(),
         type: "DataScrapeNode",
+        dragHandle: ".drag-handle",
         data: {
             type: nodeType,
             inputs: {},

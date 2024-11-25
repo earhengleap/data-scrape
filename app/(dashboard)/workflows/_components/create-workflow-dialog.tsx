@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -20,30 +21,23 @@ const CreateWorkflowDialog = ({ triggerText }: { triggerText?: string }) => {
     
     const form = useForm<CreateWorkflowSchemaType>({
         resolver: zodResolver(CreateWorkflowSchema),
-        defaultValues: {
-            name: ""
-        },
+        defaultValues: {},
     });
 
     const { mutate, isPending } = useMutation({
         mutationFn: CreateWorkflow,
         onSuccess: () => {
-            toast.success("Workflow created successfully");
-            setIsOpen(false);
+            toast.success("Workflow created successfully", { id: "create-workflow"});
         },
         onError: (error) => {
-            toast.error("Failed to create workflow");
-            console.error("Create workflow error:", error);
+            toast.error("Failed to create workflow", {id: "create-workflow"});
         },
     }) 
 
     const onSubmit = useCallback(
         (values: CreateWorkflowSchemaType) => {
-            const toastId = toast.loading("Creating workflow...");
-            mutate(values, {
-                onSuccess: () => toast.dismiss(toastId),
-                onError: () => toast.dismiss(toastId)
-            });
+            toast.loading("Creating workflow...", { id: "create-workflow"});
+            mutate(values);
         },
         [mutate]
     )
@@ -54,7 +48,7 @@ const CreateWorkflowDialog = ({ triggerText }: { triggerText?: string }) => {
             setIsOpen(IsOpen);
         }}>
             <DialogTrigger asChild>
-                <Button>{triggerText ?? "Create workflow"}</Button>
+                <Button>{triggerText ?? "Create workflow"}</Button>         
             </DialogTrigger>
             <DialogContent className="px-0">
                 <CustomDialogHeader
@@ -64,7 +58,10 @@ const CreateWorkflowDialog = ({ triggerText }: { triggerText?: string }) => {
                 />
                 <div className="p-6">
                     <FormProvider {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+                        <form 
+                            className="space-y-8 w-full"
+                            onSubmit={form.handleSubmit(onSubmit)}
+                        >
                             <FormField
                                 control={form.control}
                                 name="name"

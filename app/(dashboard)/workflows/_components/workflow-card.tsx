@@ -34,7 +34,7 @@ const WorkflowActions = ({workflowName, workflowId} : {workflowName: string, wor
          <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant={'outline'} size={'sm'}>
-                    <TooltipWrapper content="More actionts">
+                    <TooltipWrapper content="More actions">
                         <div className="flex items-center justify-center w-full h-full">
                             <MoreVerticalIcon size={18} />
                         </div>
